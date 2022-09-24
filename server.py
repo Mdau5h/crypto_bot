@@ -19,6 +19,8 @@ async def send_welcome(message: types.Message):
     This handler will be called when user sends `/start` or `/help` command
     """
     welcome_message = "Привет! Это бот-шифратор. Если ты сюда попал, мой создатель тебе очень доверяет.\n"
+    if message.from_user['id'] == config.ADMIN_ID:
+        welcome_message = "Здравствуй, создатель!\n"
     await message.answer(welcome_message)
     await message.delete()
 
