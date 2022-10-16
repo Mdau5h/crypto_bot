@@ -50,12 +50,12 @@ async def send_encoded(message: types.Message, state: FSMContext):
     await message.answer(key, reply_markup=kb)
 
 
-
 @dp.message_handler(commands=['decode'], state=None)
 async def decode_message(message: types.Message):
     answer = "Введи сообщение для декодирования"
     await FSM.decode_state_message.set()
     await message.answer(answer, reply_markup=ReplyKeyboardRemove())
+    await message.delete()
 
 
 @dp.message_handler(state=FSM.decode_state_message)
@@ -73,7 +73,7 @@ async def send_encoded(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['key'] = message.text
         decoded_message = decode(data['message'], data['key'])
-        
+
     answer = "Ваше сообщение должно быть раскодировано тут"
     await state.finish()
     await message.answer(answer)
