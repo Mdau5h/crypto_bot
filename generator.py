@@ -11,4 +11,3 @@ def get_key():
 if __name__ == '__main__':
     result = get_key()
     print(result)
-    
