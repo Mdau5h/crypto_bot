@@ -10,8 +10,8 @@ class FSM(StatesGroup):
 
 def encode(message):
     key = get_key()
-    return message, key
+    return message + " (типа, закодировано)", key
 
 
 def decode(message, key):
-    return message + key
+    return message + " (типа, раскодировано ключом:)" + key
